@@ -6,7 +6,8 @@
  * $dater->addUser($user_id);
  * $dater->run();
  *------------------------
- * $dater->book($customer_id,$user_id,$date)
+ * $dater->book($customer_id, $user_id, $date)
+ * $dater->defineTime($user_id, $day_name, $time)
  *------------------------
  * Class Dater
  * This class provides functionality for a booking system.
@@ -68,6 +69,24 @@ class Dater
         } else {
             echo "Seçilen tarih ve saat için randevu müsait değil.";
         }
+    }
+    
+    /**
+     * Defines a specific time for a user on a given day.
+     * @param $userId The ID of the user.
+     * @param $dayName The name of the day (e.g., Monday, Tuesday).
+     * @param $time The time to define (e.g., 15:30, 13:00).
+     */
+    public function defineTime($userId, $dayName, $time)
+    {
+        if (!$this->isUserValid($userId)) {
+            echo "Geçersiz kullanıcı.";
+            return;
+        }
+        
+        $sql = "INSERT INTO appointments_available_times (user_id, day_name, time) VALUES ($userId, '$dayName', '$time')";
+        $this->db->exec($sql);
+        echo "Zaman başarıyla tanımlandı.";
     }
     
     /**
