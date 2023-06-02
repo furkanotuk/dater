@@ -11,11 +11,6 @@ You only need to invoke the "run" function once.
 
 $dater = new Dater();
 $dater->setDatabase($database_variable);
-$dater->addUser($user_id);
-$dater->run();
-
-// You should use this function after run();
-
 $dater->defineTime($user_id,'monday','12:00');
 
 // ...
